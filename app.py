@@ -1,7 +1,15 @@
 from pathlib import Path
+import sys
+
+# Ensure the repository root is importable on local Python and Streamlit Cloud.
+PROJECT_ROOT = Path(__file__).resolve().parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 import streamlit as st
 from dotenv import load_dotenv
 
+# These modules must exist under ./services in the GitHub repository.
 from services.idea_generator import generate_ideas
 from services.youtube_service import search_videos, youtube_configured
 from services.video_maker import create_video

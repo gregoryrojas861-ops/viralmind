@@ -110,3 +110,22 @@ VIRALMIND_AI/
     storage.py
   tests/
 ```
+
+## 10. Desplegar en Streamlit Community Cloud
+
+1. Sube **el contenido** de esta carpeta a la raíz del repositorio de GitHub; no subas solo el ZIP.
+2. Confirma en GitHub que `app.py`, `config.py`, `requirements.txt` y la carpeta `services/` estén al mismo nivel.
+3. Dentro de `services/` deben estar `__init__.py`, `idea_generator.py`, `youtube_service.py`, `video_maker.py`, `youtube_upload.py` y `storage.py`.
+4. En Streamlit Community Cloud, selecciona el repositorio, la rama y `app.py` como archivo principal.
+5. Si configuras claves, añádelas en **App settings → Secrets**; no subas `.env`, `client_secret.json` ni `token.json` a GitHub. Para Streamlit Secrets usa formato TOML, por ejemplo:
+
+```toml
+YOUTUBE_API_KEY = "tu_clave"
+OPENAI_API_KEY = "tu_clave_opcional"
+OPENAI_MODEL = "gpt-4o-mini"
+```
+
+6. Reinicia la app tras confirmar que los archivos y dependencias estén en el repositorio.
+
+**Importante:** el generador de ideas y la búsqueda de YouTube pueden funcionar en Cloud si se configuran sus claves. La creación de MP4 depende de FFmpeg, que no está garantizado en Streamlit Community Cloud sin configuración adicional. La subida OAuth incluida está pensada principalmente para ejecución local y no debe darse por funcional en Cloud sin adaptar el flujo de autenticación.
+
